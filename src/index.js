@@ -1,20 +1,16 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const { PrismaClient } = require('@prisma/client');
+import express from 'express';
+import { config } from 'dotenv';
+import { PrismaClient } from '@prisma/client';
+import router from './routes/routes.js';
 
 const app = express();
-dotenv.config();
+config();
 const prisma = new PrismaClient();
 
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.send('ini halaman utama')
-})
-
-app.get('/user', async(req, res) => {
-    res.send(await prisma.user.findMany())
-})
+app.use(express.json())
+app.use('/', router)
 
 app.listen(port, () => {
     console.log(`server running on http://localhost:${port}`);
