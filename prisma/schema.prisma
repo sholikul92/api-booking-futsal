@@ -19,5 +19,5 @@ model User {
   phoneNumber String @unique
   password String
   image String?
-  refreshToken String?
+  refreshToken String? @db.Text
 }

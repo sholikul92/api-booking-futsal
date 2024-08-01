@@ -1,14 +1,14 @@
 import express from 'express';
 import { config } from 'dotenv';
-import { PrismaClient } from '@prisma/client';
 import router from './routes/routes.js';
+import cookieParser from 'cookie-parser'
 
 const app = express();
 config();
-const prisma = new PrismaClient();
 
 const port = process.env.PORT || 3000;
 
+app.use(cookieParser())
 app.use(express.json())
 app.use('/', router)
 
