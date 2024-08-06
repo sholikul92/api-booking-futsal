@@ -1,4 +1,10 @@
-import { findAlluser, createUser, findUserByLogin, updateRefreshToken, findUserByToken } from "../services/user.service.js";
+import { 
+    findAlluser,
+    createUser,
+    findUserByLogin,
+    updateRefreshToken,
+    findUserByToken 
+} from "../services/user.service.js";
 import { response } from '../utils/responseJson.js';
 import { hashedPassword, comparePassword } from "../utils/hash.js";
 import { encodedToken } from "../auth/jwtToken.js";
@@ -6,7 +12,6 @@ import { encodedToken } from "../auth/jwtToken.js";
 const getAllUser = async (req, res) => {
     try {
         const data = await findAlluser();
-
         res.status(200).json(response("success", 200, "get data success", data))
     } catch (error) {
         res.status(500).json(response("failed", 500, error.message, null))
@@ -47,7 +52,6 @@ const loginUser = async (req, res) => {
 
         await updateRefreshToken(body.phoneNumber, refreshToken)
 
-        // memasukan refresh token kedalam cookie
         res.cookie('refreshToken', refreshToken, {
             httpOnly : true,
             maxAge: 24 * 60 * 60 * 1000 //1 hari

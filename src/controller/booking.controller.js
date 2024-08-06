@@ -18,8 +18,9 @@ export const bookings = async (req, res) => {
         const userID = user[0].userID
 
         await createBooking(userID, fieldID, startDateTime, endDateTime, 'booked')
-        res.json("booking success")
+
+        res.status(201).json(response( 'success', 201, 'insert booking successfully', null ))
     } catch (error) {
-        res.json(error.message)
+        res.status(500).json(response('failed', 500, error.message, null))
     }
 }

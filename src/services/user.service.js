@@ -58,15 +58,10 @@ const updateRefreshToken = async (phoneNumber, refreshToken) => {
 
 }
 
-// const updateRefreshTokenByID = async (refreshToken, userID) => {
-//     await prisma.user.update({
-//         data : {
-//             refreshToken : refreshToken
-//         },
-//         where : {
-//             userID : userID
-//         }
-//     })
-// }
-
-export {createUser, findAlluser, findUserByLogin, updateRefreshToken, findUserByToken}
+export {
+    createUser,
+    findAlluser,
+    findUserByLogin,
+    updateRefreshToken,
+    findUserByToken
+}

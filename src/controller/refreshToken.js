@@ -19,7 +19,5 @@ export const reqRefreshToken = async (req, res) => {
         })
     } catch (error) {
         res.status(500).json(response(500, "failed", error.message, null))
-    }
-
-    
+    }    
 }
