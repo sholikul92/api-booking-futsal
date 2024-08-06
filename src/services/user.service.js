@@ -9,13 +9,13 @@ const createUser = async (body, hashPassword) => {
         password : hashPassword
     }
 
-    await prisma.user.create({
+    await prisma.users.create({
         data: payload
     })
 }
 
 const findAlluser = async () => {
-    const data = await prisma.user.findMany({
+    const data = await prisma.users.findMany({
         select : {
             userID: true,
             name : true,
@@ -27,7 +27,7 @@ const findAlluser = async () => {
 }
 
 const findUserByLogin = async (body) => {
-    const data = await prisma.user.findUnique({
+    const data = await prisma.users.findUnique({
         where : {
             phoneNumber : body.phoneNumber
         }
@@ -37,7 +37,7 @@ const findUserByLogin = async (body) => {
 }
 
 const findUserByToken = async (token) => {
-    const data = await prisma.user.findMany({
+    const data = await prisma.users.findMany({
         where : {
             refreshToken : token
         }
@@ -47,7 +47,7 @@ const findUserByToken = async (token) => {
 }
 
 const updateRefreshToken = async (phoneNumber, refreshToken) => {
-    await prisma.user.update({
+    await prisma.users.update({
         data : {
             refreshToken: refreshToken
         },

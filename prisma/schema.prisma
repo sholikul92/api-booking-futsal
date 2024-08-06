@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -13,11 +14,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   userID Int @id @default(autoincrement())
   name String
   phoneNumber String @unique
   password String
   image String?
   refreshToken String? @db.Text
+  booking Bookings[]
+}
+
+model Fields {
+  fieldID Int @id @default(autoincrement())
+  name String
+  price Int
+  booking Bookings[]
+}
+
+model Bookings {
+  bookingID Int @id @default(autoincrement())
+  userName Users @relation(fields: [userID], references: [userID])
+  userID Int
+  fieldName Fields @relation(fields: [fieldID], references: [fieldID])
+  fieldID Int
+  startTime DateTime
+  endTime DateTime
+  status String
 }

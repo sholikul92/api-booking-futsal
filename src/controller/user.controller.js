@@ -1,4 +1,4 @@
-import { findAlluser, createUser, findUserByLogin, updateRefreshToken, findUserByToken } from "../services/user.js";
+import { findAlluser, createUser, findUserByLogin, updateRefreshToken, findUserByToken } from "../services/user.service.js";
 import { response } from '../utils/responseJson.js';
 import { hashedPassword, comparePassword } from "../utils/hash.js";
 import { encodedToken } from "../auth/jwtToken.js";
@@ -65,7 +65,6 @@ const logout = async (req, res) => {
         if(!refreshToken) return res.sendStatus(204);
     
         const user = await findUserByToken(refreshToken);
-        console.log(user)
         if(!user) return res.sendStatus(204);
 
         await updateRefreshToken(user[0].phoneNumber, null)

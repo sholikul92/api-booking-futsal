@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { findUserByToken } from '../services/user.js';
+import { findUserByToken } from '../services/user.service.js';
 import { encodedToken } from '../auth/jwtToken.js';
 import { response } from '../utils/responseJson.js';
 
